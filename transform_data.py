@@ -58,7 +58,8 @@ def to_matrix():
             temp = {}
             temp["source"] = x
             temp["target"] = y
-            temp["value"] = (1 - spatial.distance.cosine(clean_matrix[x],clean_matrix[y])) * 3
+            # temp["value"] = (1 - spatial.distance.cosine(clean_matrix[x],clean_matrix[y])) * 3
+            temp["value"] = (1 - spatial.distance.cosine(clean_matrix[x],clean_matrix[y])) * 5 - 2.1
             links.append(temp)
 
     js = {}
@@ -69,9 +70,8 @@ def to_matrix():
     print json.dumps(js)
 
 
+def diputados_multiples_partidos():
+    c.execute('''select nombre, count(*) from Diputado Group by nombre having count(*) > 1''')
 
-    # print clean_matrix
-    # print len(clean_matrix)
-    # print len(clean_diputados)
 
 to_matrix()
