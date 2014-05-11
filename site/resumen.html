@@ -26,13 +26,25 @@
     <script type="text/javascript" charset="utf-8">
         data = [{titulo: "hola", favor: {pan: 88.9}}];
 
+        function createPartyNodes(party_json){
+            var imagen_p = $("#imagen_p").clone();
+            $(imagen_p).children("img").attr("src", "pan.png");
+            $(imagen_p).children("img").attr("alt", "PAN");
+            $(imagen_p).children("span").html("80.9");
+        
+            return imagen_p;
+        }
+
         $(function() {
-            titulo_tr = $("#titulo_tr").clone();
+            var titulo_tr = $("#titulo_tr").clone();
             $(titulo_tr).children("td").html("hola");
             $('#table > tbody:last').append(titulo_tr);
 
-            header_tr = $("#header_tr").clone();
+            var header_tr = $("#header_tr").clone();
             $('#table > tbody:last').append(header_tr);
+
+            var imagen_p = createPartyNode();
+
         });
     </script>
     
@@ -56,9 +68,9 @@
                 <img src="pan.png" alt=""/>
                 <span>88.5%</span>
             </p>
-            <p class="image">
-                <img src="pan.png" alt=""/>
-                <span>88.5%</span>
+            <p class="image" id="imagen_p">
+                <img src="" alt=""/>
+                <span></span>
             </p>
             </td>
             <td>pri</td>
