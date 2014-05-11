@@ -2,6 +2,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <style type="text/css" media="all">
        .blank_row
         {
@@ -24,16 +25,25 @@
 
     <script type="text/javascript" charset="utf-8">
         data = [{titulo: "hola", favor: {pan: 88.9}}];
+
+        $(function() {
+            titulo_tr = $("#titulo_tr").clone();
+            $(titulo_tr).children("td").html("hola");
+            $('#table > tbody:last').append(titulo_tr);
+
+            header_tr = $("#header_tr").clone();
+            $('#table > tbody:last').append(header_tr);
+        });
     </script>
     
 </head>
 <body>
-<table class="table">
+<table class="table" id="table">
       <tbody>
-        <tr class="active">
+        <tr class="active" id="titulo_tr">
           <td colspan="5">De la Comisión de Trabajo y Previsión Social, con proyecto de decreto que reforma, adiciona y deroga diversas disposiciones de la Ley Federal del Trabajo (en lo general y en lo particular).</td>
         </tr>
-        <tr>
+        <tr id="header_tr">
           <td>Favor</td>
           <td>Contra</td>
           <td>Abstenci&oacute;n</td>
@@ -57,26 +67,6 @@
             <td>pan</td>
         </tr>
         <tr class="blank_row"></tr>
-        <tr class="active">
-          <td colspan="5">De la Comisión de Trabajo y Previsión Social, con proyecto de decreto que reforma, adiciona y deroga diversas disposiciones de la Ley Federal del Trabajo (en lo general y en lo particular).</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-        </tr>
-        <tr class="active">
-          <td colspan="5">De la Comisión de Trabajo y Previsión Social, con proyecto de decreto que reforma, adiciona y deroga diversas disposiciones de la Ley Federal del Trabajo (en lo general y en lo particular).</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-        </tr>
       </tbody>
     </table>
 </body>
