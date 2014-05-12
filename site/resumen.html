@@ -24,7 +24,10 @@
     <title>Diputados</title>
 
     <script type="text/javascript" charset="utf-8">
-        data = [{titulo: "hola", favor: {pan: 88.9}}];
+data = [{titulo: "hola eduardo", votos: {favor: {pan: 88.9}, quorum: {pri:40.50}}},
+{titulo: "adios eduardo", votos: {contra: {pan: 88.9}, ausente: {pri:40.50}}}
+     
+     ];
 
         function createPartyNodes(party_json){
             var $nodes = $();
@@ -45,22 +48,36 @@
         }
 
         $(function() {
-            var titulo_tr = $("#titulo_tr").clone();
-            $(titulo_tr).children("td").html("hola");
-            $(titulo_tr).removeAttr("id");
-            $('#table > tbody:last').append(titulo_tr);
+            var arrayLength = data.length;
 
-            var header_tr = $("#header_tr").clone();
-            $(header_tr).removeAttr("id");
-            $('#table > tbody:last').append(header_tr);
+            for (var i = 0; i < arrayLength; i++) {
+                var titulo_tr = $("#titulo_tr").clone();
+                $(titulo_tr).children("td").html(data[i]["titulo"]);
+                $(titulo_tr).removeAttr("id");
+                $('#table > tbody:last').append(titulo_tr);
 
-            todos_nodes = createPartyNodes({pan: 85.9, pri: 30.3});
-            $("#pruba").append(todos_nodes)
-            
-            var votos_tr = $("#votos_tr").clone();
-            $(votos_tr).children().first().append(createPartyNodes({pan: 69.9}));
-            $(votos_tr).removeAttr("id");
-            $('#table > tbody:last').append(votos_tr);
+                var header_tr = $("#header_tr").clone();
+                $(header_tr).removeAttr("id");
+                $('#table > tbody:last').append(header_tr);
+
+                todos_nodes = createPartyNodes({pan: 85.9, pri: 30.3});
+                $("#pruba").append(todos_nodes)
+                
+                var votos_tr = $("#votos_tr").clone();
+                for (var tipo in data[i]["votos"]){
+                    if (data[i]["votos"].hasOwnProperty(tipo)) {
+                        partidos = data[i]["votos"][tipo];
+                        $(votos_tr).children("#"+tipo).first().append(createPartyNodes(partidos));
+                    }
+                }
+                $(votos_tr).removeAttr("id");
+                $('#table > tbody:last').append(votos_tr);
+
+                var blank_tr = $("#blank_tr").clone();
+                $(blank_tr).removeAttr("id");
+                $('#table > tbody:last').append(blank_tr);
+            }
+
         });
     </script>
     
@@ -79,13 +96,13 @@
           <td>Ausente</td>
         </tr>
         <tr id="votos_tr">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="favor"></td>
+            <td id="contra"></td>
+            <td id="abstencion"></td>
+            <td id="quorum"></td>
+            <td id="ausente"></td>
         </tr>
-        <tr class="blank_row"></tr>
+        <tr class="blank_row" id="blank_tr"></tr>
       </tbody>
     </table>
     <p class="image" id="imagen_p" style="display:none">
