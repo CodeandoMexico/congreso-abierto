@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 import sqlite3
 import json
 from random import randint
-from scipy import spatial
+# from scipy import spatial
 
 conn = sqlite3.connect('diputados.db')
+conn.text_factory = str
 c = conn.cursor()
 
 #-1 es un voto inexistente, no hay registro o diputado no existia en ese tiempo
@@ -67,11 +69,71 @@ def to_matrix():
     js["links"] = links
 
 
-    print json.dumps(js)
+    print(json.dumps(js))
 
 
 def diputados_multiples_partidos():
     c.execute('''select nombre, count(*) from Diputado Group by nombre having count(*) > 1''')
 
+def partido_id_to_acronym(p_id):
+    return {
+        1: "pri",
+        2: "pan",
+        3: "prd",
+        4: "pvem",
+        5: "pt",
+        6: "panal",
+        7: "mc",
+        8: "sp",
+        9: "convergencia",
+        10: "pa",
+        11: "psn",
+        12: "pas",
+        13: "cpd",
+    }[p_id]
 
-to_matrix()
+def tipo_id_to_tipo(tipo_id):
+    return {
+        1: "favor",
+        2: "ausente",
+        3: "abstencion",
+        4: "quorum",
+        5: "contra",
+    }[tipo_id]
+
+def promedio():
+    c.execute('''select Votacion.decreto, Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 Group by p_id, tipo_id, Voto.v_id order by Voto.v_id ASC''')
+
+    last_v_id = -1
+    resumen = []
+    temp = {}
+
+    for row in c:
+        if row[1] != last_v_id:
+            if last_v_id != -1:
+                resumen.append(temp)
+            temp = {}
+            last_v_id = row[1]
+
+            temp["titulo"] = row[0]
+            # temp["titulo"] = row[0].encode("utf-8")
+            # temp["titulo"] = str(row[0]).encode('utf-8')
+            temp["votos"] = {}
+            temp["votos"][tipo_id_to_tipo(row[3])] = {}
+            temp["votos"][tipo_id_to_tipo(row[3])][partido_id_to_acronym(row[2])] = row[4]
+        else:
+            if tipo_id_to_tipo(row[3]) not in temp["votos"]:
+                temp["votos"][tipo_id_to_tipo(row[3])] = {}
+            temp["votos"][tipo_id_to_tipo(row[3])][partido_id_to_acronym(row[2])] = row[4]
+
+    resumen.append(temp)
+    print(resumen)
+    # f = open('myfile.txt','w')
+    # f.write(json.dumps(resumen))
+    # print json.dumps(resumen)
+
+
+
+
+# to_matrix()
+promedio()
