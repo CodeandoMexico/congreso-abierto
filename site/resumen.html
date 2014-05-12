@@ -27,12 +27,19 @@
         data = [{titulo: "hola", favor: {pan: 88.9}}];
 
         function createPartyNodes(party_json){
-            var imagen_p = $("#imagen_p").clone();
-            $(imagen_p).children("img").attr("src", "pan.png");
-            $(imagen_p).children("img").attr("alt", "PAN");
-            $(imagen_p).children("span").html("80.9");
+            var $nodes = $();
+            for (var k in party_json){
+                if (party_json.hasOwnProperty(k)) {
+                    var imagen_p = $("#imagen_p").clone();
+                    $(imagen_p).children("img").attr("src", k+".png");
+                    $(imagen_p).children("img").attr("alt", k.toUpperCase());
+                    $(imagen_p).children("span").html(party_json[k]);
+                    $nodes = $nodes.add(imagen_p);
+                }
+            }
+
         
-            return imagen_p;
+            return $nodes;
         }
 
         $(function() {
@@ -43,7 +50,7 @@
             var header_tr = $("#header_tr").clone();
             $('#table > tbody:last').append(header_tr);
 
-            var imagen_p = createPartyNode();
+            todos_nodes = createPartyNodes({pan: 88.9, pri: 30.3});
 
         });
     </script>
