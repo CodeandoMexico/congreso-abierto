@@ -50,7 +50,8 @@
             var header_tr = $("#header_tr").clone();
             $('#table > tbody:last').append(header_tr);
 
-            todos_nodes = createPartyNodes({pan: 88.9, pri: 30.3});
+            todos_nodes = createPartyNodes({pan: 85.9, pri: 30.3});
+            $("#pruba").append(todos_nodes)
 
         });
     </script>
@@ -80,7 +81,7 @@
                 <span></span>
             </p>
             </td>
-            <td>pri</td>
+            <td id="pruba"></td>
             <td>prd pan</td>
             <td></td>
             <td>pan</td>
