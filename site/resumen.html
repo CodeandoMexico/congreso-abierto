@@ -34,6 +34,8 @@
                     $(imagen_p).children("img").attr("src", k+".png");
                     $(imagen_p).children("img").attr("alt", k.toUpperCase());
                     $(imagen_p).children("span").html(party_json[k]);
+                    $(imagen_p).removeAttr("id");
+                    $(imagen_p).removeAttr("style");
                     $nodes = $nodes.add(imagen_p);
                 }
             }
@@ -45,23 +47,29 @@
         $(function() {
             var titulo_tr = $("#titulo_tr").clone();
             $(titulo_tr).children("td").html("hola");
+            $(titulo_tr).removeAttr("id");
             $('#table > tbody:last').append(titulo_tr);
 
             var header_tr = $("#header_tr").clone();
+            $(header_tr).removeAttr("id");
             $('#table > tbody:last').append(header_tr);
 
             todos_nodes = createPartyNodes({pan: 85.9, pri: 30.3});
             $("#pruba").append(todos_nodes)
-
+            
+            var votos_tr = $("#votos_tr").clone();
+            $(votos_tr).children().first().append(createPartyNodes({pan: 69.9}));
+            $(votos_tr).removeAttr("id");
+            $('#table > tbody:last').append(votos_tr);
         });
     </script>
     
 </head>
 <body>
-<table class="table" id="table">
+<table class="table" style="display:none">
       <tbody>
         <tr class="active" id="titulo_tr">
-          <td colspan="5">De la Comisión de Trabajo y Previsión Social, con proyecto de decreto que reforma, adiciona y deroga diversas disposiciones de la Ley Federal del Trabajo (en lo general y en lo particular).</td>
+          <td colspan="5"></td>
         </tr>
         <tr id="header_tr">
           <td>Favor</td>
@@ -70,24 +78,23 @@
           <td>Qu&oacute;rum</td>
           <td>Ausente</td>
         </tr>
-        <tr>
-            <td>
-            <p class="image">
-                <img src="pan.png" alt=""/>
-                <span>88.5%</span>
-            </p>
-            <p class="image" id="imagen_p">
-                <img src="" alt=""/>
-                <span></span>
-            </p>
-            </td>
-            <td id="pruba"></td>
-            <td>prd pan</td>
+        <tr id="votos_tr">
             <td></td>
-            <td>pan</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr class="blank_row"></tr>
       </tbody>
     </table>
+    <p class="image" id="imagen_p" style="display:none">
+        <img src="" alt=""/>
+        <span></span>
+    </p>
+<table class="table" id="table">
+      <tbody>
+      </tbody>
+</table>
 </body>
 </html>
