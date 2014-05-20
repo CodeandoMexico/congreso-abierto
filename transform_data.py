@@ -133,7 +133,7 @@ def tipo_id_to_tipo(tipo_id):
     }[tipo_id]
 
 def promedio():
-    c.execute('''select Votacion.decreto, Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 Group by p_id, tipo_id, Voto.v_id order by Voto.v_id ASC''')
+    c.execute('''select Votacion.decreto, Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC''')
 
     last_v_id = -1
     resumen = []
