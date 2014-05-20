@@ -91,6 +91,21 @@ def diputados_multiples_partidos():
 
     print(resultado)
 
+def los_mas_ausentes():
+    c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=2 group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom DESC limit 25 ''')
+
+    resultados = []
+    for row in c:
+        temp = {}
+        temp["porcentaje"] = row[1]
+        temp["faltas"] = row[2]
+        temp["posibles"] = row[3]
+        temp["partido"] = partido_id_to_acronym(row[4])
+        temp["nombre"] = row[5]
+        resultados.append(temp)
+    print(resultados)
+
+
 def partido_id_to_acronym(p_id):
     return {
         1: "pri",
@@ -153,4 +168,5 @@ def promedio():
 
 # to_matrix()
 # promedio()
-diputados_multiples_partidos()
+# diputados_multiples_partidos()
+los_mas_ausentes()
