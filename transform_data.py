@@ -73,7 +73,23 @@ def to_matrix():
 
 
 def diputados_multiples_partidos():
-    c.execute('''select nombre, count(*) from Diputado Group by nombre having count(*) > 1''')
+    c.execute('''select nombre, count(*) as c from Diputado Group by nombre having count(*) > 1 order by c DESC''')
+    nombres = c.fetchall()
+    resultado = []
+    for row in nombres:
+        temp = {}
+        temp["nombre"] = row[0]
+        temp["cuantos"] = str(row[1])
+        temp["partidos"] = []
+
+        c.execute('''select p_id from Diputado where nombre like ?''', (row[0],))
+        partidos = c.fetchall()
+        for partido in partidos:
+            temp["partidos"].append(partido_id_to_acronym(partido[0]))
+            
+        resultado.append(temp)
+
+    print(resultado)
 
 def partido_id_to_acronym(p_id):
     return {
@@ -136,4 +152,5 @@ def promedio():
 
 
 # to_matrix()
-promedio()
+# promedio()
+diputados_multiples_partidos()
