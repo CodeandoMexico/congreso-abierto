@@ -133,7 +133,7 @@ def tipo_id_to_tipo(tipo_id):
     }[tipo_id]
 
 def promedio():
-    c.execute('''select Votacion.decreto, Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC''')
+    c.execute('''select Votacion.decreto, Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC, Voto.v_id ASC''')
 
     last_v_id = -1
     resumen = []
@@ -147,8 +147,6 @@ def promedio():
             last_v_id = row[1]
 
             temp["titulo"] = row[0]
-            # temp["titulo"] = row[0].encode("utf-8")
-            # temp["titulo"] = str(row[0]).encode('utf-8')
             temp["votos"] = {}
             temp["votos"][tipo_id_to_tipo(row[3])] = {}
             temp["votos"][tipo_id_to_tipo(row[3])][partido_id_to_acronym(row[2])] = row[4]
@@ -163,10 +161,35 @@ def promedio():
     # f.write(json.dumps(resumen))
     # print json.dumps(resumen)
 
+def count_tabla():
+    c.execute(''' select count(*) from Votacion where tiempo_id=1  ''')
+    for row in c:
+        cantidad = row[0]
+
+    c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=1 group by Diputado.p_id''')
+    
+    partidos = {}
+    for row in c:
+        partidos[row[0]] = [0] * cantidad
+
+    c.execute('''select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 and tipo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC''')
+
+    last_v_id = -1
+
+    i = 0
+
+    for row in c:
+        if row[0] != last_v_id:
+            if last_v_id != -1:
+                i = i + 1
+            last_v_id = row[0]
+        partidos[row[1]][i] = row[3]
 
 
+    print(partidos)
 
 # to_matrix()
 # promedio()
 # diputados_multiples_partidos()
-los_mas_ausentes()
+# los_mas_ausentes()
+count_tabla()
