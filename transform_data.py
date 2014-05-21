@@ -169,8 +169,12 @@ def count_tabla():
     c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=1 group by Diputado.p_id''')
     
     partidos = {}
+    partidos_array = []
     for row in c:
-        partidos[row[0]] = [0] * cantidad
+        partidos[row[0]] = {}
+        partidos[row[0]]["name"] = partido_id_to_acronym(row[0]) 
+        partidos[row[0]]["data"] = [0] * cantidad
+        partidos_array.append(partidos[row[0]])
 
     c.execute('''select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 and tipo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC''')
 
@@ -183,10 +187,10 @@ def count_tabla():
             if last_v_id != -1:
                 i = i + 1
             last_v_id = row[0]
-        partidos[row[1]][i] = row[3]
+        partidos[row[1]]["data"][i] = row[3]
 
 
-    print(partidos)
+    print(partidos_array)
 
 # to_matrix()
 # promedio()
