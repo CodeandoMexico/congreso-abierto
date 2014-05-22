@@ -157,9 +157,6 @@ def promedio():
 
     resumen.append(temp)
     print(resumen)
-    # f = open('myfile.txt','w')
-    # f.write(json.dumps(resumen))
-    # print json.dumps(resumen)
 
 def count_tabla():
     c.execute(''' select count(*) from Votacion where tiempo_id=1  ''')
