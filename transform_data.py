@@ -80,31 +80,67 @@ def diputados_multiples_partidos():
         temp = {}
         temp["nombre"] = row[0]
         temp["cuantos"] = str(row[1])
-        temp["partidos"] = []
+        # temp["partidos"] = []
+        temp["partidos"] = ""
 
         c.execute('''select p_id from Diputado where nombre like ?''', (row[0],))
         partidos = c.fetchall()
         for partido in partidos:
-            temp["partidos"].append(partido_id_to_acronym(partido[0]))
+            # temp["partidos"].append(partido_id_to_acronym(partido[0])).upper()
+            temp["partidos"] = temp["partidos"] + partido_id_to_acronym(partido[0]).upper() + ", "
+        temp["partidos"] = temp["partidos"][:-2]
+        temp["partidos"] = temp["partidos"][::-1].replace(", "[::-1], " y "[::-1], 1)[::-1]
             
         resultado.append(temp)
 
     print(resultado)
 
 def los_mas_ausentes():
-    c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=2 group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom DESC limit 25 ''')
+    c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=1 group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom ASC limit 25''')
 
     resultados = []
     for row in c:
         temp = {}
-        temp["porcentaje"] = row[1]
+        temp["porcentaje"] = round(row[1]*100,2)
+        # temp["porcentaje"] = row[1]*100
         temp["faltas"] = row[2]
         temp["posibles"] = row[3]
-        temp["partido"] = partido_id_to_acronym(row[4])
+        temp["partido"] = partido_id_to_acronym(row[4]).upper()
         temp["nombre"] = row[5]
         resultados.append(temp)
+
     print(resultados)
 
+def por_partido_ausentes():
+    c.execute(''' select falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, Partido.nombre from (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id and tipo_id=1 group by p_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by p_id ) as asist_table, Partido where Partido.p_id = falta_table.p_id and falta_table.p_id = asist_table.p_id order by prom DESC''')
+
+    resultados = []
+    for row in c:
+        temp = {}
+        temp["porcentaje"] = round(row[0]*100,2)
+        temp["faltas"] = row[1]
+        temp["posibles"] = row[2]
+        temp["partido"] = row[4]
+        resultados.append(temp)
+
+    print(resultados)
+
+def partido_id_to_color(p_id):
+    return {
+        1: "#FF0000",
+        2: "#0000FF",
+        3: "#FFFF00",
+        4: "#00FF00",
+        5: 0,
+        6: "#008080",
+        7: 0,
+        8: 0,
+        9: "#FF8000",
+        10: 0,
+        11: 0,
+        12: 0,
+        13: "#FF8000",
+    }[p_id]
 
 def partido_id_to_acronym(p_id):
     return {
@@ -159,21 +195,29 @@ def promedio():
     print(resumen)
 
 def count_tabla():
-    c.execute(''' select count(*) from Votacion where tiempo_id=1  ''')
+    c.execute(''' select count(*) from Votacion where tiempo_id=22  ''')
     for row in c:
         cantidad = row[0]
 
-    c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=1 group by Diputado.p_id''')
+    c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=22 group by Diputado.p_id''')
     
     partidos = {}
     partidos_array = []
     for row in c:
         partidos[row[0]] = {}
-        partidos[row[0]]["name"] = partido_id_to_acronym(row[0]) 
+        partidos[row[0]]["name"] = partido_id_to_acronym(row[0]).upper()
+        if partido_id_to_color(row[0]):
+            partidos[row[0]]["color"] = partido_id_to_color(row[0]) 
         partidos[row[0]]["data"] = [0] * cantidad
         partidos_array.append(partidos[row[0]])
 
-    c.execute('''select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=1 and tipo_id=1 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC''')
+    # c.execute('''select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c from Voto, Diputado, Votacion where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=2 and tipo_id=4 Group by p_id, tipo_id, Voto.v_id order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC''')
+    c.execute(''' select Votacion.v_id,t.p_id,t.tipo_id,t.c from Votacion LEFT JOIN (
+            select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c 
+            from Voto, Diputado, Votacion 
+            where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=22 and tipo_id=4 
+            Group by p_id, tipo_id, Voto.v_id 
+            order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC) as t on Votacion.v_id = t.v_id where Votacion.tiempo_id=22''')
 
     last_v_id = -1
 
@@ -184,13 +228,17 @@ def count_tabla():
             if last_v_id != -1:
                 i = i + 1
             last_v_id = row[0]
-        partidos[row[1]]["data"][i] = row[3]
+        if row[3]:
+            partidos[row[1]]["data"][i] = row[3]
+        else:
+            partidos[1]["data"][i] = 0 
 
 
     print(partidos_array)
 
 # to_matrix()
 # promedio()
-# diputados_multiples_partidos()
+diputados_multiples_partidos()
 # los_mas_ausentes()
-count_tabla()
+# por_partido_ausentes()
+# count_tabla()
