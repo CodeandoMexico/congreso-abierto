@@ -29,10 +29,37 @@
 #sidebar {
     padding: 50px;
 }
+
 </style>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+    $("#btn").hover(
+            function() {
+            var filterVal = 'blur(0px)';
+
+            $({blurRadius: 5}).animate({blurRadius: 0}, {
+        duration: 200,
+        easing: 'swing', // or "linear"
+                         // use jQuery UI or Easing plugin for more options
+        step: function() {
+            console.log(this.blurRadius);
+            var filterVal = "blur("+this.blurRadius+"px)";
+            $("#bgimg").css('filter',filterVal).css('webkitFilter',filterVal).css('mozFilter',filterVal).css('oFilter',filterVal).css('msFilter',filterVal);
+        }
+    });
+
+  }, function() {
+            var filterVal = 'blur(5px)';
+            $("#bgimg").css('filter',filterVal).css('webkitFilter',filterVal).css('mozFilter',filterVal).css('oFilter',filterVal).css('msFilter',filterVal);
+  }
+  );
+    });
+</script>
 
 </head>
 <body >
+<div id="bgimg"></div>
 <section class="intro">
         <div class="intro-body">
             <div class="container">
@@ -41,7 +68,7 @@
                         <h1 class="brand-heading">Congreso Abierto</h1>
                         <p class="intro-text">El ciudadano mexicano vota y luego olvida. ¿Qué pasa en el congreso mientras nadie está poniendo atención?</p>
                         <div class="page-scroll">
-                            <a href="/main" class="btn btn-default btn-lg">ver más</a>
+                            <a id="btn" href="/main" class="btn btn-default btn-lg">ver más</a>
                         </div>
                     </div>
                 </div>

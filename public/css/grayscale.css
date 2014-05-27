@@ -129,7 +129,8 @@ a:focus {
     color: #fff;
 }
 
-.intro:before {
+/* .intro:before { */
+#bgimg {
   content: "";
   position: fixed;
   left: 0;
