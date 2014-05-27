@@ -291,7 +291,7 @@ a:focus {
 }
 
 .btn {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     -webkit-transition: all .3s ease-in-out;
@@ -303,18 +303,18 @@ a:focus {
     /* border: 1px solid #e74c3c; */
     /* color: #e74c3c; */
     /* background-color: transparent; */
-    border: 1px solid #e74c3c;
+    border: 1px solid #2ecc71;
     outline: 0;
-    color: #000;
-    background-color: #e74c3c;
+    color: #FFF;
+    background-color: #2ecc71;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #e74c3c;
+    border: 1px solid #2ecc71;
     outline: 0;
     color: #000;
-    background-color: #e74c3c;
+    background-color: #2ecc71;
     /* background-color: #28c3ab; */
 }
 
