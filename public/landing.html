@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--includes meta tags, title and more header definitions-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<meta name="description" content="Camara de Diputados">
+<meta name="keywords" content="camara, diputados, mexico, parlamento, abierto, open, data">
+<meta name="author" content="Codeando México">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link rel="icon" type="image/png" href="/furatto/assets/img/favicon.png">
+<title>
+    Cámara de Diputados
+</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/grayscale.css" rel="stylesheet">
+<style type="text/css" media="all">
+#trigger{
+    padding-left:50px;
+}
+#main_content {
+    padding: 30px;
+}
+
+#sidebar {
+    padding: 50px;
+}
+
+</style>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+    $("#btn").hover(
+            function() {
+            var filterVal = 'blur(0px)';
+
+            $({blurRadius: 5}).animate({blurRadius: 0}, {
+        duration: 200,
+        easing: 'swing', // or "linear"
+                         // use jQuery UI or Easing plugin for more options
+        step: function() {
+            console.log(this.blurRadius);
+            var filterVal = "blur("+this.blurRadius+"px)";
+            $("#bgimg").css('filter',filterVal).css('webkitFilter',filterVal).css('mozFilter',filterVal).css('oFilter',filterVal).css('msFilter',filterVal);
+        }
+    });
+
+  }, function() {
+            var filterVal = 'blur(5px)';
+            $("#bgimg").css('filter',filterVal).css('webkitFilter',filterVal).css('mozFilter',filterVal).css('oFilter',filterVal).css('msFilter',filterVal);
+  }
+  );
+    });
+</script>
+
+</head>
+<body >
+<div id="bgimg"></div>
+<section class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Congreso Abierto</h1>
+                        <p class="intro-text">El ciudadano mexicano vota y luego olvida. ¿Qué pasa en el congreso mientras nadie está poniendo atención?</p>
+                        <div class="page-scroll">
+                            <a id="btn" href="/main" class="btn btn-default btn-lg">ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
