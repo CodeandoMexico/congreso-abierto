@@ -40,6 +40,17 @@
 
 #sidebar {
     padding: 50px;
+    /* position: fixed; */
+}
+
+@media only screen 
+and (min-width : 1024px) {
+    #sidebar {
+        position:fixed;
+    }
+    #main_content {
+        padding-left:378px;
+    }
 }
     
 </style>
@@ -67,15 +78,22 @@
 
 <div class="blog">
   <div class="row">
-    <div id="sidebar" class="col-3">
+    <div id="sidebar">
       <ul class="navigation">
-        <li><a href="#">News</a></li>
-        <li><a href="#">Code</a></li>
-        <li><a href="#">Furatto</a></li>
-        <li><a href="#">Icalia Labs</a></li>
+        <li><a href="#">Introducción</a></li>
+        <li><a href="#t_1">1. Partidos en la Cámara</a></li>
+        <li><a href="#t_2">2. Cantidad de diputados</a></li>
+        <li><a href="#t_3">3. Cantidad de votaciones</a></li>
+        <li><a href="#t_4">4. Los 25 diputados que más faltan</a></li>
+        <li><a href="#t_5">5. Los 25 diputados que menos faltan</a></li>
+        <li><a href="#t_6">6. Asistencias por Partido</a></li>
+        <li><a href="#t_7">7. Tendencias de partidos: Votos a favor</a></li>
+        <li><a href="#t_8">8. Tendencias de partidos: Votos en contra</a></li>
+        <li><a href="#t_9">9. Diputados de multiples partidos</a></li>
+        <li><a href="#t_10">10. Todos de acuerdo</a></li>
       </ul>
     </div>
-    <div id="main_content" class="col-9">
+    <div id="main_content" class="col-12">
       <div class="row">
 
 <h1>Un vistazo de la C&aacute;mara de Diputados</h1>
@@ -89,10 +107,10 @@
 
 <h3>Los datos nos hablan</h3>
 
-<h4>1. Partidos en la Cámara</h4>
+<h4><a id="t_1">1. Partidos en la Cámara</a></h4>
 <p>Desde septiembre del 2000 a abril del 2014 ha habido diputados de 12 partidos diferentes en la Cámara. Además, en este mismo periodo hemos tenido 6 diputados independientes. Actualmente existen diputados de 7 partidos en nuestra cámara.</p>
 
-<h4>2. Cantidad de diputados</h4>
+<h4><a id="t_2">2. Cantidad de diputados</a></h4>
 <p>En estas 5 Legislaturas han entrado a la Cámara 3122 diputados.</p>
 <table>
     <tr>
@@ -153,10 +171,10 @@
     </tr>
 </table>
 
-<h4>3. Cantidad de votaciones</h4>
+<h4><a id="t_3">3. Cantidad de votaciones</a></h4>
 <p>Desde septiembre del 2000 a abril del 2014, cubriendo un total de 5 Legislaturas se han llevado a cabo 2589 votaciones. Alrededor de 190 votaciones por año. El <a href="http://gaceta.diputados.gob.mx/Gaceta/Votaciones/61/vot_a3primero.html">periodo</a> con más votaciones fue el primer periodo ordinario del tercer año de la LXI Legislatura llevado acabo desde septiembre a diciembre del 2011 con 220 votaciones. </p>
 
-<h4>4. Los 25 diputados que más faltan</h4>
+<h4><a id="t_4">4. Los 25 diputados que más faltan</a></h4>
 <p>Los diputados pueden decidir no asistir a una votación. En la votación su voto es perdido y marcado como "ausente". Para averiguar quienes son los diputados que más han faltado a sus votaciones, consideramos varios factores. Existen diputados que renuncian a sus responsabilidades en un corto plazo por lo tanto para esta métrica sólo consideramos a los diputados que han tenido la oportunidad de asistir a por lo menos 100 votaciones.</p>
 
 <table id="diputados_faltan">
@@ -175,7 +193,7 @@
 <p>Miguel Ángel Osorio Chong, actual Secretario de Gobernación falto al 163 votaciones de las 223 que pudo haber asistido y Josefina Vázquez Mota que falto a 237 de 343 votaciones. </p>
 <p>Cinco por ciento de los diputados que han estado en la Cámara han faltado a más de la mitad de sus votaciones.</p>
 
-<h4>5. Los 25 diputados que menos faltan</h4>
+<h4><a id="t_5">5. Los 25 diputados que menos faltan</a></h4>
 <p>Estos son los diputados que menos han faltado y han tenido la oportunidad de asistir a por lo menos 100 votaciones.</p>
 
 <table id="diputados_asisten">
@@ -190,7 +208,7 @@
     </tbody>
 </table>
 
-<h4>6. Asistencias por Partido</h4>
+<h4><a id="t_6">6. Asistencias por Partido</a></h4>
 <p>En la siguiente tabla podemos observar las ausencias por partido en las votaciones.</p>
 <table id="partidos_asisten">
     <thead>
@@ -203,21 +221,21 @@
     </tbody>
 </table>
 
-<h4>7. Tendencias de partidos: Votos a favor</h4>
+<h4><a id="t_7">7. Tendencias de partidos: Votos a favor</a></h4>
 <p>Veamos como votan los partidos dependiendo del presidente en cargo. En las siguientes gráficas podras comparar como votaron los partidos en los primeros meses (febrero-abril 2013, febrero-abril 2007 y marzo-abril 2001) de cada presidente (Peña Nieto, Calderon y Fox)</p>
 
 <div id="fox_diputados_favor" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 <div id="calderon_diputados_favor" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 <div id="pena_diputados_favor" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 
-<h4>8. Tendencias de partidos: Votos en contra</h4>
+<h4><a id="t_8">8. Tendencias de partidos: Votos en contra</a></h4>
 <p>Veamos como votan los partidos dependiendo del presidente en cargo. En las siguientes gráficas podras comparar como votaron los partidos en los primeros meses (febrero-abril 2013, febrero-abril 2007 y marzo-abril 2001) de cada presidente (Peña Nieto, Calderon y Fox)</p>
 
 <div id="fox_diputados_contra" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 <div id="calderon_diputados_contra" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 <div id="pena_diputados_contra" style="min-width: 200px; height: 400px; margin: 0 auto"></div>
 
-<h4>9. Diputados de multiples partidos</h4>
+<h4><a id="t_9">9. Diputados de multiples partidos</a></h4>
 <p>Estos son los diputados que te han representado a travez de diferentes partidos en diferentes legislaciones.</p>
 
 <table id="diputados_partidos">
@@ -230,7 +248,7 @@
     </tbody>
 </table>
 
-<h4>10. Todos de acuerdo</h4>
+<h4><a id="t_10">10. Todos de acuerdo</a></h4>
 <p></p>
 
 
