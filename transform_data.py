@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 import json
+import os
 from random import randint
 # from scipy import spatial
 
@@ -93,10 +94,58 @@ def diputados_multiples_partidos():
             
         resultado.append(temp)
 
-    print(resultado)
+    return json.dumps(resultado)
 
-def los_mas_ausentes():
-    c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=1 group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom ASC limit 25''')
+def output_json_files():
+    directory = os.path.join(os.getcwd(), 'json')
+
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    titulo_4()
+    titulo_5()
+    titulo_6()
+    titulo_7()
+    titulo_8()
+    titulo_9()
+    titulo_10()
+
+def titulo_4():
+    with open("json/titulo_4.json", "wt") as out_file:
+        out_file.write(top_25_tipo_voto("2","DESC"))
+
+def titulo_5():
+    with open("json/titulo_5.json", "wt") as out_file:
+        out_file.write(top_25_tipo_voto("2","ASC"))
+
+def titulo_6():
+    with open("json/titulo_6.json", "wt") as out_file:
+        out_file.write(por_partido_tipo_voto("2"))
+
+def titulo_7():
+    with open("json/titulo_7_1.json", "wt") as out_file:
+        out_file.write(count_tabla("22","1"))
+    with open("json/titulo_7_2.json", "wt") as out_file:
+        out_file.write(count_tabla("22","4"))
+
+def titulo_8():
+    with open("json/titulo_8_1.json", "wt") as out_file:
+        out_file.write(count_tabla("5","1"))
+    with open("json/titulo_8_2.json", "wt") as out_file:
+        out_file.write(count_tabla("5","4"))
+
+def titulo_9():
+    with open("json/titulo_9_1.json", "wt") as out_file:
+        out_file.write(count_tabla("2","1"))
+    with open("json/titulo_9_2.json", "wt") as out_file:
+        out_file.write(count_tabla("2","4"))
+
+def titulo_10():
+    with open("json/titulo_10.json", "wt") as out_file:
+        out_file.write(diputados_multiples_partidos())
+
+def top_25_tipo_voto(tipo_id, order):
+    c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=? group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom ''' + order + " limit 25", (tipo_id, ))
 
     resultados = []
     for row in c:
@@ -109,10 +158,10 @@ def los_mas_ausentes():
         temp["nombre"] = row[5]
         resultados.append(temp)
 
-    print(resultados)
+    return json.dumps(resultados)
 
-def por_partido_ausentes():
-    c.execute(''' select falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, Partido.nombre from (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id and tipo_id=1 group by p_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by p_id ) as asist_table, Partido where Partido.p_id = falta_table.p_id and falta_table.p_id = asist_table.p_id order by prom DESC''')
+def por_partido_tipo_voto(tipo_id):
+    c.execute(''' select falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, Partido.nombre from (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id and tipo_id=? group by p_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by p_id ) as asist_table, Partido where Partido.p_id = falta_table.p_id and falta_table.p_id = asist_table.p_id order by prom DESC''', (tipo_id,))
 
     resultados = []
     for row in c:
@@ -123,7 +172,7 @@ def por_partido_ausentes():
         temp["partido"] = row[4]
         resultados.append(temp)
 
-    print(resultados)
+    return json.dumps(resultados)
 
 def partido_id_to_color(p_id):
     return {
@@ -164,8 +213,8 @@ def tipo_id_to_tipo(tipo_id):
         1: "favor",
         2: "ausente",
         3: "abstencion",
-        4: "quorum",
-        5: "contra",
+        4: "contra",
+        5: "quorum",
     }[tipo_id]
 
 def promedio():
@@ -194,12 +243,12 @@ def promedio():
     resumen.append(temp)
     print(resumen)
 
-def count_tabla():
-    c.execute(''' select count(*) from Votacion where tiempo_id=22  ''')
+def count_tabla(tiempo_id, tipo_id):
+    c.execute(''' select count(*) from Votacion where tiempo_id=?''',(tiempo_id,))
     for row in c:
         cantidad = row[0]
 
-    c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=22 group by Diputado.p_id''')
+    c.execute('''select Diputado.p_id from Voto, Votacion,Diputado where Voto.d_id=Diputado.d_id and Voto.v_id=Votacion.v_id and tiempo_id=? group by Diputado.p_id''', (tiempo_id,))
     
     partidos = {}
     partidos_array = []
@@ -215,9 +264,9 @@ def count_tabla():
     c.execute(''' select Votacion.v_id,t.p_id,t.tipo_id,t.c from Votacion LEFT JOIN (
             select Voto.v_id, Diputado.p_id, tipo_id, count(Voto.d_id) as c 
             from Voto, Diputado, Votacion 
-            where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=22 and tipo_id=4 
+            where Voto.d_id=Diputado.d_id and Votacion.v_id=Voto.v_id and Votacion.tiempo_id=? and tipo_id=? 
             Group by p_id, tipo_id, Voto.v_id 
-            order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC) as t on Votacion.v_id = t.v_id where Votacion.tiempo_id=22''')
+            order by Votacion.fecha ASC, Voto.v_id ASC ,Diputado.p_id ASC) as t on Votacion.v_id = t.v_id where Votacion.tiempo_id=?''', (tiempo_id, tipo_id, tiempo_id))
 
     last_v_id = -1
 
@@ -234,11 +283,13 @@ def count_tabla():
             partidos[1]["data"][i] = 0 
 
 
-    print(partidos_array)
+    return json.dumps(partidos_array)
+
+
 
 # to_matrix()
 # promedio()
-diputados_multiples_partidos()
-# los_mas_ausentes()
+# diputados_multiples_partidos()
+output_json_files()
 # por_partido_ausentes()
 # count_tabla()
