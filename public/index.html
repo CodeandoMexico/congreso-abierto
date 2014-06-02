@@ -314,7 +314,9 @@ and (min-width : 1024px) {
  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
- ga('create', 'UA-46973214-5', 'heroku.com');
+ ga('create', 'UA-46973214-5', {
+  'cookieDomain': 'cddblog.heroku.com'
+}); 
  ga('send', 'pageview');
 
 </script>
