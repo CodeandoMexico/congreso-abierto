@@ -50,6 +50,27 @@ and (min-width : 1024px) {
         padding-left:378px;
     }
 }
+
+#footer
+{
+    background-color:#191818;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+}
+
+#main_row
+{
+    margin-bottom:50px;
+}
+
+#logo
+{
+    padding-left: 15px;
+}
     
 </style>
 
@@ -75,7 +96,7 @@ and (min-width : 1024px) {
 
 
 <div class="blog">
-  <div class="row">
+  <div id="main_row" class="row">
     <div id="sidebar">
       <ul class="navigation">
         <li><a href="#">Introducción</a></li>
@@ -106,9 +127,6 @@ and (min-width : 1024px) {
         <div style="position: absolute; left: -5000px;"><input type="text" name="b_9999e133ff73ed69bbddc6af9_c059c9b1c6" tabindex="-1" value=""></div>
         <div class="clear"><input type="submit" value="Suscríbete" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
     </form>
-    <a href="http://codeandomexico.org" target="_blank" >
-            <img src="/images/logo.png">
-          </a>
 </div>
 
 <!--End mc_embed_signup-->
@@ -277,6 +295,12 @@ and (min-width : 1024px) {
     </div>
   </div>
 
+</div>
+
+<div id="footer">
+    <a id="logo" href="http://codeandomexico.org" target="_blank" >
+            <img src="/images/logo_white.png">
+          </a>
 </div>
 
 
