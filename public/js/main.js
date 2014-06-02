@@ -1,4 +1,4 @@
-$.getJSON("json/diputados_partido.json", function(json) {
+$.getJSON("json/titulo_10.json", function(json) {
     $('#diputados_partidos').dynatable({
         dataset: {
             records: json
@@ -12,7 +12,7 @@ $.getJSON("json/diputados_partido.json", function(json) {
     });
 });
 
-$.getJSON("json/faltas.json", function(json) {
+$.getJSON("json/titulo_4.json", function(json) {
     $('#diputados_faltan').dynatable({
         dataset: {
             records: json
@@ -26,7 +26,7 @@ $.getJSON("json/faltas.json", function(json) {
     });
 });
 
-$.getJSON("json/asisten.json", function(json) {
+$.getJSON("json/titulo_5.json", function(json) {
     $('#diputados_asisten').dynatable({
         dataset: {
             records: json
@@ -40,7 +40,7 @@ $.getJSON("json/asisten.json", function(json) {
     });
 });
 
-$.getJSON("json/asisten_partidos.json", function(json) {
+$.getJSON("json/titulo_6.json", function(json) {
     $('#partidos_asisten').dynatable({
         dataset: {
             records: json
@@ -55,7 +55,7 @@ $.getJSON("json/asisten_partidos.json", function(json) {
 });
 
 
-$.getJSON("json/fox_contra.json", function(json) {
+$.getJSON("json/titulo_7_2.json", function(json) {
     $(function () {
         $('#fox_diputados_contra').highcharts({
             chart: {
@@ -85,7 +85,7 @@ $.getJSON("json/fox_contra.json", function(json) {
     });
 });
 
-$.getJSON("json/calderon_contra.json", function(json) {
+$.getJSON("json/titulo_8_2.json", function(json) {
     $(function () {
         $('#calderon_diputados_contra').highcharts({
             chart: {
@@ -115,7 +115,7 @@ $.getJSON("json/calderon_contra.json", function(json) {
     });
 });
 
-$.getJSON("json/pena_contra.json", function(json) {
+$.getJSON("json/titulo_9_2.json", function(json) {
     $(function () {
         $('#pena_diputados_contra').highcharts({
             chart: {
@@ -145,7 +145,7 @@ $.getJSON("json/pena_contra.json", function(json) {
     });
 });
 
-$.getJSON("json/fox_favor.json", function(json) {
+$.getJSON("json/titulo_7_1.json", function(json) {
     $(function () {
         $('#fox_diputados_favor').highcharts({
             chart: {
@@ -175,7 +175,7 @@ $.getJSON("json/fox_favor.json", function(json) {
     });
 });
 
-$.getJSON("json/calderon_favor.json", function(json) {
+$.getJSON("json/titulo_8_1.json", function(json) {
     $(function () {
         $('#calderon_diputados_favor').highcharts({
             chart: {
@@ -205,7 +205,7 @@ $.getJSON("json/calderon_favor.json", function(json) {
     });
 });
 
-$.getJSON("json/pena_favor.json", function(json) {
+$.getJSON("json/titulo_9_1.json", function(json) {
     $(function () {
         $('#pena_diputados_favor').highcharts({
             chart: {
