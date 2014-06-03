@@ -1,3 +1,5 @@
+$(document).ready(function(){ 
+
 $.getJSON("json/titulo_10.json", function(json) {
     $('#diputados_partidos').dynatable({
         dataset: {
@@ -233,4 +235,34 @@ $.getJSON("json/titulo_9_1.json", function(json) {
             series: json
         });
     });
+});
+
+ topRange      = 100,  // measure from the top of the viewport to X pixels down
+     edgeMargin    = 20,   // margin above the top or margin from the end of the page
+     contentTop = [];
+
+setTimeout( function(){ 
+    // Do something after 1 second 
+ // Set up content an array of locations
+ $('#sidemenu').find('a').each(function(){
+  contentTop.push( $( $(this).attr('href') ).offset().top );
+ })
+
+ // adjust side menu
+ $(window).scroll(function(){
+  var winTop = $(window).scrollTop(),
+      bodyHt = $(document).height(),
+      vpHt = $(window).height() + edgeMargin;  // viewport height + margin
+  $.each( contentTop, function(i,loc){
+   if ( ( loc > winTop - edgeMargin && ( loc < winTop + topRange || ( winTop + vpHt ) >= bodyHt ) ) ){
+    $('#sidemenu li')
+     .removeClass('selected')
+     .eq(i).addClass('selected');
+   }
+  })
+ })
+  
+  }
+ , 1000 );
+
 });
