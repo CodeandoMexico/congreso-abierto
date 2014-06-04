@@ -177,7 +177,7 @@ def por_partido_tipo_voto(tipo_id):
 def partido_id_to_color(p_id):
     return {
         1: "#e74c3c",
-        2: "#5dade2",
+        2: "#2980B9",
         3: "#f1c40f",
         4: "#2ecc71",
         5: "#8E44AD",
