@@ -1,5 +1,19 @@
 $(document).ready(function(){ 
 
+$.getJSON("json/titulo_2.json", function(json) {
+    $('#diputados_por_partido').dynatable({
+        dataset: {
+            records: json
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+});
+
 $.getJSON("json/titulo_10.json", function(json) {
     $('#diputados_partidos').dynatable({
         dataset: {
