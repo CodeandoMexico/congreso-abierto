@@ -53,3 +53,7 @@ and (min-width : 1024px) {
   font-weight: 700;
 }
 
+#link_icons {
+    float:right;
+    color:white;
+}
