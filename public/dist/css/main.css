@@ -56,4 +56,11 @@ and (min-width : 1024px) {
 #link_icons {
     float:right;
     color:white;
+    font-size:200%;
+    padding-top:8px;
+    padding-right:10px;
+}
+
+#link_icons i {
+    color:white;
 }
