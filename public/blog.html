@@ -1,0 +1,178 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/jquery.dynatable.js" type="text/javascript"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+
+<title></title> 
+</head>
+<body>
+<h1>Un vistazo de la C&aacute;mara de Diputados</h1>
+<h4>Los datos detrás de la "voluntad y capacidad para generar acuerdos" de los Diputados</h4>
+<h3>¿Qu&eacute; exactamente pasa en la C&aacute;mara en Diputados? ¿Qu&eacute; es la C&aacute;mara en Diputados?</h2>
+<p>En M&eacute;xico, el Congreso de la Uni&oacute;n es el &oacute;rgano depositario del Poder Legislativo a nivel federal. Est&aacute; compuesta por dos c&aacute;maras: la C&aacute;mara de Diputados con 500 diputados y el Senado con 128 senadores.</p>
+<p>Por ahora, nos enfocaremos en la C&aacute;mara de Diputados. Cada 3 años los mexicanos votamos por nuestros representantes en dicha C&aacute;mara. 300 diputados son elegidos por el voto popular de cada distrito y los otros 200, los diputados plurinominales, son elegidos por cada partido y su cantidad depende de su parte proporcional de los votos de los ciudadanos aunque no hayan ganado las elecciones. La naturaleza de un Diputado es la representación de nosotros los ciudadanos, en términos muy sencillos los diputados representan al pueblo y los senadores a los estados y a la républica.</p>
+<p>Por lo tanto, es importante estar informados sobre el trabajo que realizan nuestros diputados. ¿Saben cuantas veces ha asistido a votar su diputado correspondiente? ¿Cuando fue la ultima vez que falto? ¿Su diputado esta votando de acuerdo a sus intereses?</p>
+<p>En Codeando México, nos dimos la tarea de encontrar información relacionada con el trabajo de los Diputados. La Cámara de Diputados libera su información en su <a href="http://www.diputados.gob.mx/Votaciones.htm">sitio</a> y para los programadores y analistas interesados les dejamos a su disposicion los datos en un formato más amigable para descargar <a href="#" >aqui</a>.</p>
+
+<h3>Los datos nos hablan</h3>
+
+<h4>1. Partidos en la Cámara</h4>
+<p>Desde septiembre del 2000 a abril del 2014 ha habido diputados de 12 partidos diferentes en la Cámara. Además, en este mismo periodo hemos tenido 6 diputados independientes. Actualmente existen diputados de 7 partidos en nuestra cámara.</p>
+
+<h4>2. Cantidad de diputados</h4>
+<p>En estas 5 Legislaturas han entrado a la Cámara 3122 diputados.</p>
+<table>
+    <tr>
+        <td>Partido</td>
+        <td>Diputados</td>
+    </tr>
+    <tr>
+        <td>Partido Revolucionario Institucional</td>
+        <td>1204</td>
+    </tr>
+    <tr>
+        <td>Partido Acción Nacional</td>
+        <td>1054</td>
+    </tr>
+    <tr>
+        <td>Partido de la Revolución Democrática</td>
+        <td>554</td>
+    </tr>
+    <tr>
+        <td>Partido Verde Ecologista de México</td>
+        <td>130</td>
+    </tr>
+    <tr>
+        <td>Partido del Trabajo</td>
+        <td>58</td>
+    </tr>
+    <tr>
+        <td>Convergencia por la Democracia</td>
+        <td>39</td>
+    </tr>
+    <tr>
+        <td>Partido Nueva Alianza</td>
+        <td>32</td>
+    </tr>
+    <tr>
+        <td>Movimiento Ciudadano</td>
+        <td>26</td>
+    </tr>
+    <tr>
+        <td>Convergencia</td>
+        <td>8</td>
+    </tr>
+    <tr>
+        <td>Partido Alternativa</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>sin partido (independientes/SP)</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>Partido Sociedad Nacionalista</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Partido Alianza Social</td>
+        <td>2</td>
+    </tr>
+</table>
+
+<h4>3. Cantidad de votaciones</h4>
+<p>Desde septiembre del 2000 a abril del 2014, cubriendo un total de 5 Legislaturas se han llevado a cabo 2589 votaciones. Alrededor de 190 votaciones por año. El <a href="http://gaceta.diputados.gob.mx/Gaceta/Votaciones/61/vot_a3primero.html">periodo</a> con más votaciones fue el primer periodo ordinario del tercer año de la LXI Legislatura llevado acabo desde septiembre a diciembre del 2011 con 220 votaciones. </p>
+
+<h4>4. Los 25 diputados que más faltan</h4>
+<p>Los diputados pueden decidir no asistir a una votación. En la votación su voto es perdido y marcado como "ausente". Para averiguar quienes son los diputados que más han faltado a sus votaciones, consideramos varios factores. Existen diputados que renuncian a sus responsabilidades en un corto plazo por lo tanto para esta métrica sólo consideramos a los diputados que han tenido la oportunidad de asistir a por lo menos 100 votaciones.</p>
+
+<table id="diputados_faltan">
+    <thead>
+        <th data-dynatable-column="nombre">Diputado</th>
+        <th>Partido</th>
+        <th data-dynatable-column="posibles">Votaciones Posibles</th>
+        <th data-dynatable-column="faltas">Faltas</th>
+        <th>Porcentaje</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<p>Cuatro diputados de los 25 que más faltan son diputados que han representado a diferentes partidos en diferentes Legislaciones. Ángel Aguirre Herrera (PRD y PRI), Jorge Antonio Kahwagi Macari (PANAL y PVEM), Socorro Sofío Ramírez Hernández (PRD y PRI) y Jaime Álvarez Cisneros (MC y Convergencia).  </p>
+<p>Miguel Ángel Osorio Chong, actual Secretario de Gobernación falto al 163 votaciones de las 223 que pudo haber asistido y Josefina Vázquez Mota que falto a 237 de 343 votaciones. </p>
+<p>Cinco por ciento de los diputados que han estado en la Cámara han faltado a más de la mitad de sus votaciones.</p>
+
+<h4>5. Los 25 diputados que menos faltan</h4>
+<p>Estos son los diputados que menos han faltado y han tenido la oportunidad de asistir a por lo menos 100 votaciones.</p>
+
+<table id="diputados_asisten">
+    <thead>
+        <th data-dynatable-column="nombre">Diputado</th>
+        <th>Partido</th>
+        <th data-dynatable-column="posibles">Votaciones Posibles</th>
+        <th data-dynatable-column="faltas">Faltas</th>
+        <th>Porcentaje</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h4>6. Asistencias por Partido</h4>
+<p>En la siguiente tabla podemos observar las ausencias por partido en las votaciones.</p>
+<table id="partidos_asisten">
+    <thead>
+        <th>Partido</th>
+        <th data-dynatable-column="posibles">Votaciones Posibles</th>
+        <th data-dynatable-column="faltas">Faltas</th>
+        <th data-dynatable-column="porcentaje">Porcentaje de ausencias</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h4>7. Tendencias de partidos: Votos a favor</h4>
+<p>Veamos como votan los partidos dependiendo del presidente en cargo. En las siguientes gráficas podras comparar como votaron los partidos en los primeros meses (febrero-abril 2013, febrero-abril 2007 y marzo-abril 2001) de cada presidente (Peña Nieto, Calderon y Fox)</p>
+
+<div id="fox_diputados_favor" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="calderon_diputados_favor" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="pena_diputados_favor" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<h4>8. Tendencias de partidos: Votos en contra</h4>
+<p>Veamos como votan los partidos dependiendo del presidente en cargo. En las siguientes gráficas podras comparar como votaron los partidos en los primeros meses (febrero-abril 2013, febrero-abril 2007 y marzo-abril 2001) de cada presidente (Peña Nieto, Calderon y Fox)</p>
+
+<div id="fox_diputados_contra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="calderon_diputados_contra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="pena_diputados_contra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<h4>9. Diputadods de multiples partidos</h4>
+<p>Estos son los diputados que te han representado a travez de diferentes partidos en diferentes legislaciones.</p>
+
+<table id="diputados_partidos">
+    <thead>
+        <th data-dynatable-column="nombre">Diputado</th>
+        <th data-dynatable-column="cuantos">Cantidad de partidos</th>
+        <th data-dynatable-column="partidos">Partidos</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h4>10. Todos de acuerdo</h4>
+<p></p>
+
+
+<br/><br/>
+<br/><br/>
+<br/><br/>
+YA resumen de como votaron los partidos por iniciativa 90% pri a favor, etc
+cuando votaron todos a favor
+cuando votaron todos en contra
+dia que mas faltaron
+YA los que se cambian de partido
+
+</body>
+</html>
