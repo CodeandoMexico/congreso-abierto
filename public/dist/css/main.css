@@ -53,3 +53,10 @@ and (min-width : 1024px) {
   font-weight: 700;
 }
 
+.tweetable > .fa-twitter {
+  color: gray;
+}
+
+.tweetable > .fa-twitter:hover {
+  color: black;
+}
