@@ -198,7 +198,7 @@
 <h4><a id="t_3">3. Cantidad de votaciones</a></h4>
 <p>   
 <ul>
-    <li class="tweetable">Desde septiembre del 2000 a abril del 2014, cubriendo un total de 5 Legislaturas se han llevado a cabo 2618 votaciones.</li>
+    <li class="tweetable" data-tweet="hola es una prueba">Desde septiembre del 2000 a abril del 2014, cubriendo un total de 5 Legislaturas se han llevado a cabo 2618 votaciones.</li>
     <li class="tweetable">Alrededor de 190 votaciones por año.</li>
     <li class="tweetable">El <a href="http://gaceta.diputados.gob.mx/Gaceta/Votaciones/61/vot_a3primero.html">periodo</a> con más votaciones fue el primer periodo ordinario del tercer año de la LXI Legislatura llevado acabo desde septiembre a diciembre del 2011 con 220 votaciones.</li>
 </ul>
@@ -342,10 +342,9 @@
 <script type="text/javascript" charset="utf-8" src="/furatto/dist/js/furatto.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-    $(".tweetable").append(" <i class=\"fa fa-twitter\"></i>");
-    $(".tweetable > .fa-twitter").click(function() {
-                alert( "Handler for .click() called." );
-                });
+    $(".tweetable").each(function( index ) {
+            $(this).append("<a href=\"https://twitter.com/intent/tweet?text="+encodeURIComponent($(this).attr("data-tweet")+"-via @codeandomexico http://cddblog.herokuapp.com")+"\"><i class=\"fa fa-twitter\"></i></a>");
+              });
 </script>
 <script>
  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
