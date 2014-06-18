@@ -102,6 +102,7 @@ def output_json_files():
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+    titulo_2()
     titulo_4()
     titulo_5()
     titulo_6()
@@ -109,6 +110,10 @@ def output_json_files():
     titulo_8()
     titulo_9()
     titulo_10()
+
+def titulo_2():
+    with open("json/titulo_2.json", "wt") as out_file:
+        out_file.write(diputados_por_partido())
 
 def titulo_4():
     with open("json/titulo_4.json", "wt") as out_file:
@@ -143,6 +148,19 @@ def titulo_9():
 def titulo_10():
     with open("json/titulo_10.json", "wt") as out_file:
         out_file.write(diputados_multiples_partidos())
+
+def diputados_por_partido():
+    c.execute(''' SELECT count(*) as c, Partido.nombre from Diputado, Partido where Diputado.p_id = Partido.p_id group by Diputado.p_id order by c DESC ''')
+
+    resultados = []
+
+    for row in c:
+        temp = {}
+        temp["partido"] = row[1]
+        temp["cuantos"] = row[0]
+        resultados.append(temp)
+
+    return json.dumps(resultados)
 
 def top_25_tipo_voto(tipo_id, order):
     c.execute(''' select falta_table.d_id, falta_table.count*1.0/asist_table.count as prom, falta_table.count, asist_table.count, asist_table.p_id, asist_table.nombre from (select *, count(*) as count from Voto where tipo_id=? group by d_id) as falta_table, (select *, count(*) as count from Voto, Diputado where Voto.d_id=Diputado.d_id group by Voto.d_id having count >=100 ) as asist_table where falta_table.d_id = asist_table.d_id order by prom ''' + order + " limit 25", (tipo_id, ))

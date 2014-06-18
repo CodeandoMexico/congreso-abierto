@@ -18,6 +18,8 @@
 <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+<link href="css/font-awesome.min.css" rel="stylesheet">
+
 <!-- Furatto core CSS -->
 <link href="dist/css/normalize.css" rel="stylesheet">
 <link href="dist/css/furatto.css" rel="stylesheet">
@@ -136,63 +138,13 @@
     <li class="tweetable" data-tweet="El partido con menos es el Partido Alianza Social, en el 2003 fue su disolución.">El partido con menos es el Partido Alianza Social, en el 2003 fue su disolución.</li>
 </ul>
 </p>
-<table>
-    <tr>
-        <td>Partido</td>
-        <td>Diputados</td>
-    </tr>
-    <tr>
-        <td>Partido Revolucionario Institucional</td>
-        <td>1204</td>
-    </tr>
-    <tr>
-        <td>Partido Acción Nacional</td>
-        <td>1054</td>
-    </tr>
-    <tr>
-        <td>Partido de la Revolución Democrática</td>
-        <td>554</td>
-    </tr>
-    <tr>
-        <td>Partido Verde Ecologista de México</td>
-        <td>130</td>
-    </tr>
-    <tr>
-        <td>Partido del Trabajo</td>
-        <td>58</td>
-    </tr>
-    <tr>
-        <td>Convergencia por la Democracia</td>
-        <td>39</td>
-    </tr>
-    <tr>
-        <td>Partido Nueva Alianza</td>
-        <td>32</td>
-    </tr>
-    <tr>
-        <td>Movimiento Ciudadano</td>
-        <td>26</td>
-    </tr>
-    <tr>
-        <td>Convergencia</td>
-        <td>8</td>
-    </tr>
-    <tr>
-        <td>Partido Alternativa</td>
-        <td>6</td>
-    </tr>
-    <tr>
-        <td>sin partido (independientes/SP)</td>
-        <td>6</td>
-    </tr>
-    <tr>
-        <td>Partido Sociedad Nacionalista</td>
-        <td>3</td>
-    </tr>
-    <tr>
-        <td>Partido Alianza Social</td>
-        <td>2</td>
-    </tr>
+<table id="diputados_por_partido">
+    <thead>
+        <th data-dynatable-column="partido">Partido</th>
+        <th data-dynatable-column="cuantos">Diputados</th>
+    </thead>
+    <tbody>
+    </tbody>
 </table>
 
 <h4><a id="t_3">3. Cantidad de votaciones</a></h4>
@@ -324,7 +276,14 @@
 </table>
 
 <h4><a id="t_11">11. Todos de acuerdo</a></h4>
-<p></p>
+<p>
+<ul>
+    <li class="tweetable" data-tweet="En noviembre 13 del 2013, todos los diputados presentes votarón a favor.">En noviembre 13 del 2013, todos los diputados presentes <a href="http://gaceta.diputados.gob.mx/Gaceta/Votaciones/62/tabla2or1-99.php3">votarón</a> a favor.</li>
+    <li >El total de votos a favor fue de 481 de 500.</li>
+    <li >19 diputados estuvieron ausentes.</li>
+    <li class="tweetable" data-tweet="Todos los diputados votarón a favor de instalar bebederos en las escuelas de todo el país.">La iniciativa apoyada por todos los diputados trata sobre la instalación de bebederos en las escuelas de todo el país.</li>
+</ul>
+</p>
     </div>
   </div>
 
@@ -334,6 +293,13 @@
     <a id="logo" href="http://codeandomexico.org" target="_blank" >
             <img src="/images/logo_white.png">
           </a>
+          <div id="link_icons"> 
+              <a target="_blank" href="mailto:equipo@codeandomexico.org"><i class="fa fa-envelope-square"></i></a>
+              <a target="_blank" href="http://www.twitter.com/codeandomexico"><i class="fa fa-twitter-square"></i></a>
+              <a target="_blank" href="http://www.facebook.com/codeandomexico"><i class="fa fa-facebook-square"></i></a>
+              <a target="_blank" href="http://www.github.com/codeandomexico/congreso-abierto"><i class="fa fa-github-square"></i></a>
+              <a target="_blank" href="http://www.datamx.io/"><i class="fa fa-file-archive-o"></i></a>
+          </div>
 </div>
 
 
