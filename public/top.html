@@ -72,6 +72,9 @@
             </select>
         </div>
         <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $.ajaxSetup({ cache: true });
+            });
 var dynatable_ref;
 $.getJSON("http://api-congreso.bluehats.mx/v1/diputados/top?tipo_voto=favor&periodo=segundo%20periodo%20ordinario&ano=segundo&legislatura=LXII&order=DESC&limit=15", function(json) {
     $('#main_table').dynatable({
