@@ -1,0 +1,64 @@
+#division {
+    padding: 5% 10% 5% 10%;
+}
+#inasistencias {
+    padding: 5% 10% 5% 10%;
+}
+#top25 {
+    padding: 5% 10% 5% 10%;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.title {
+    text-align: center
+}
+
+.center{
+    display: table;
+    margin: auto;
+}
+
+#div-left-side{
+    float:left;
+    width:30%;
+}
+
+#div-right-side{
+    float:right;
+    width:25%
+}
+
+#sueldo{
+    height: 40px;
+    border-radius: 10px;
+    background-color: grey;
+    padding: 10%;
+}
+
+#sueldo-left{
+    float:left;
+    width:25%;
+}
+#sueldo-right{
+    float:right;
+    width:75%;
+}
+
+#presidente-camara{
+    height: 90px;
+    border-radius: 10px;
+    background-color: grey;
+    padding: 10%;
+}
+
+.votaciones-left{
+    float:left;
+    width:50%;
+}
+.votaciones-right{
+    float:right;
+    width:50%;
+}

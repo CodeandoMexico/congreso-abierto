@@ -1,0 +1,23 @@
+en index esta la estructura basica del diseno, el css esta en el folder de css. estamos usando c3 y d3 (c3 es una libreria sobre d3 que facilita cierto tipos de graficas)
+
+para ver las graficas y el index.html que ya tenemos necesitas correr un miniservidor (para que las rutas de los assets de js y css se cargen correctamente) yo lo que hago es correr "python -m SimpleHTTPServer" en el root folder del proyecto
+
+las graficas que tenemos son 
+- el piechart con la cantidad de diputados por partidos (esta en pie-graph-bar-graph.html)
+- bar chart horizontal con cantidad N de cada persona (esta en pie-graph-bar-graph.html) 
+- la guia de colores, es decir, cada color como una bolita y alado el nombredel partido (el codigo lo tiene ricardo)
+- grafica de inasistencias (la tiene ricardo)
+
+cosas que no se pueden:
+- la grafica de actividad legislativa, no tenemos la informacion suficiente entonces solo seria las propuestas por mes o semana y seria un bar chart mas sencillo
+
+cosas que faltan:
+- barra que dice diputados de sexo femenino y masculino
+- escoger y poner los colores correctos
+- falta recibir la version final de los curules (hugo menciono que estaba chueco o que lo queria modificar), ya teniendo el svg este es "embebido" en el html y d3 lo reconoce como un elemento nativo
+- falta hacer el codigo de backend o conectarlo con el api
+- hacer el menu que esta estatico en la izquierda
+- falta footer
+- falta header
+- falta header que sale cuando estas scrolleando (es diferente)
+
